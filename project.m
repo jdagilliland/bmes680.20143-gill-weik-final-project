@@ -160,8 +160,10 @@ disease_control_tree = fitctree(stacked_data',grps','MaxCat',2);
 resuberror = resubLoss(disease_control_tree)
 view(disease_control_tree,'Mode','graph')
 % Extract what the predictors are.
-predictors = predictorImportance(disease_control_tree)>0;
-predictorgenes = extract_gene_info(gene_table, stacked_genes(predictors));
+imp = predictorImportance(disease_control_tree);
+predictors = imp > 0;
+[maximps, imaximps] = sort(imp, 'descend');
+predictorgenes = extract_gene_info(gene_table, stacked_genes(imaximps(1:6)));
 
 %% Correlate age and genes
 % Assumes that missing data are normal.
