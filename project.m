@@ -209,7 +209,8 @@ n_age_alz_vc = nnz(strcmp(Age_Alz_tissues, 'VC'))
 n_age_norm_pfc = nnz(strcmp(Age_Norm_tissues, 'PFC'))
 n_age_norm_cr = nnz(strcmp(Age_Norm_tissues, 'CR'))
 n_age_norm_vc = nnz(strcmp(Age_Norm_tissues, 'VC'))
-
-%% Third party clustering
-addpath('/Users/nicoleweikert/Documents/MATLAB/Bioinformatics/bmes680.20143-gill-weik-final-project');
-fuzclu=fcm(stacked_data);
+%% Clustergram
+groups=double(disease_state);
+cm=struct('ColumnLabels',{1,0},'Color',{'b','m'});
+cgo_all = clustergram(stacked_data(1:30,1:30),'ColumnLabels',groups(1,1:30))
+set(cgo_all,'ColumnLabelsColor',cm)
